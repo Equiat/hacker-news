@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker News</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/mainStyles.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <section id="list" class="page demo-list">
+        <div id="list-navigation">
+            <div class="list-filter">
+                <li id="filter-active" class="filter">
+                    <div class="list-filter-label"><h1>Hacker News</h1></div>
+                </li>
+            </div>
+            <div class="filter-indicator icon-caret-down"></div>
+            
+            <div id="list-navigation-container">
+                <div id="list-navigation-container-items">
+                    <ul>
+                        
+                        {% for item in news %}
+                        <li data-color="green">
+                            <a href="#">
+                                <div class="item-left">
+                                    <div class="item-header">
+                                        <div class="item-badge item-green">{{item.score}}</div>
+                                        <div class="item-title">{{ item.title }}</div>
+                                    </div>
+                                    <!-- <p>Author: {{ item.author.capitalize }} | <span>Score: {{ item.score }}</span> | <span>Type: {{ item.type.capitalize }}</span> | <span>Date: {{ item.time|date:"U"}}</span></p> -->
+                                    <div class="item-meta item-assignee">Author: <strong>{{ item.author.capitalize }}</strong></div>
+                                    <div class="item-meta item-assignee">Type: <strong>{{ item.type.capitalize }}</strong></div>
+                                    <div class="item-meta item-due">Date: <strong>{{ item.time }}</strong></div>
+                                </div>
+                                <div class="item-right">
+                                    <i class="icon-caret-right"></i>
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor %} 
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Page navigation start -->
+        <div class="pagination-box p-box-2 text-center">
+            <nav aria-label="Page navigation example">
+                {% if news.has_other_pages %}
+                <ul class="pagination">
+                    {% if news.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ news.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link"><i class="fa fa-angle-left"></i></a>
+                    </li>
+                    {% endif %}
+                    {% for page_number in news.paginator.page_range %}
+                    {% if news.number == page_number %}
+                        <li class="page-item"><a class="page-link active" href="#">{{ page_number }}</a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    
+                    {% if news.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ news.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link"><i class="fa fa-angle-right"></i></a>
+                    </li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </nav>
+        </div>
+    </section>
+</body>
+</html>

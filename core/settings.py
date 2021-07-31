@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # third party apps
     'rest_framework',
+    'django_filters',
 
     # local apps
     'news',

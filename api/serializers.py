@@ -1,3 +1,11 @@
-from django.db import models
+from rest_framework import serializers
 
-# Create your models here.
+from news.models  import NewsItem
+
+
+class NewsItemSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = NewsItem
+        fields = ('id', 'title', 'author', 'type', 'url', 'text', 'score',)
+    

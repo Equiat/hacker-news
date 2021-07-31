@@ -13,14 +13,6 @@
     <section id="list" class="page demo-list">
         <div id="list-navigation">
             <div class="list-filter">
-                <form >
-                    <input type="hidden" name="story" value="story">
-                    <button type="submit">Story</button>
-                </form>
-                <form>
-                    <input type="hidden" name="job" value="job">
-                    <button type="submit">Job</button>
-                </form>
                 <li id="filter-active" class="filter">
                     <div class="list-filter-label">
                         <a href="{% url 'home' %}"><h1>Hacker News</h1></a>
@@ -36,15 +28,17 @@
                 </li>
             </div>
             <div class="filter-indicator icon-caret-down"></div>
+
             
-            < id="list-navigation-container">
-                {% if types is None %}
+            
+            <div id="list-navigation-container" style="margin-top: 48px;">
+                <h1 style="text-align: center; color: white">Search Results</h1>
+                <p style="text-align: center; color: white">{{news|length}} results found</p>
+                
+                <div id="list-navigation-container-items" style="margin-top: 30px;">
                     
-                <div id="list-navigation-container-items">
-                    
-                    <ul>
                         
-                            
+                    <ul>
                         {% for item in news %}
                         <li data-color="green">
                             <a href="#">
@@ -52,7 +46,6 @@
                                     <div class="item-header">
                                         <div class="item-title"><h5 item-green>{{ item.title.title }}</h5></div>
                                     </div>
-                                    <!-- <p>Author: {{ item.author.capitalize }} | <span>Score: {{ item.score }}</span> | <span>Type: {{ item.type.capitalize }}</span> | <span>Date: {{ item.time|date:"U"}}</span></p> -->
                                     <div class="item-meta item-assignee"><p>Author: <strong>{{ item.author.capitalize }}</strong></p></div>
                                     <div class="item-meta item-assignee"><p>Type: <strong>{{ item.type.capitalize }}</strong></p></div>
                                     <div class="item-meta item-due"><p>Date: <strong>{{ item.time }}</strong></p></div>
@@ -101,35 +94,6 @@
                         {% endif %}
                     </nav>
                 </div>
-
-                {% endif %}
-
-                {% if types is not None %}
-                <div id="list-navigation-container-items">
-                    
-                    <ul>  
-                        {% for item in types %}
-                        <li data-color="green">
-                            <a href="#">
-                                <div class="item-left">
-                                    <div class="item-header">
-                                        <div class="item-title"><h5 item-green>{{ item.title.title }}</h5></div>
-                                    </div>
-                                    <!-- <p>Author: {{ item.author.capitalize }} | <span>Score: {{ item.score }}</span> | <span>Type: {{ item.type.capitalize }}</span> | <span>Date: {{ item.time|date:"U"}}</span></p> -->
-                                    <div class="item-meta item-assignee"><p>Author: <strong>{{ item.author.capitalize }}</strong></p></div>
-                                    <div class="item-meta item-assignee"><p>Type: <strong>{{ item.type.capitalize }}</strong></p></div>
-                                    <div class="item-meta item-due"><p>Date: <strong>{{ item.time }}</strong></p></div>
-                                </div>
-                                <div class="item-right">
-                                    <i class="icon-caret-right"></i>
-                                </div>
-                            </a>
-                        </li>
-                        {% endfor %} 
-                    </ul>
-                </div>
-
-                {% endif %}
             </div>
         </div>
     </section>

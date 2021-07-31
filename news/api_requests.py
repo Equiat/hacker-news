@@ -1,5 +1,5 @@
 import requests
-from news.models.news_item import NewsItem
+from news.models import NewsItem
 
 BASE_URL = 'https://hacker-news.firebaseio.com/v0'
 ALL_NEWS = {}
@@ -9,7 +9,7 @@ NEWS_ITEMS = []
 def get_all_news():
     ''' get list of 100 most recent news from Hacker News API '''
 
-    response = requests.get(f'{BASE_URL}/newstories.json?print=pretty&orderBy="$key"&limitToFirst=30')
+    response = requests.get(f'{BASE_URL}/newstories.json?print=pretty&orderBy="$key"&limitToFirst=100')
     data = response.json()
 
     ALL_NEWS['data'] = data

@@ -213,7 +213,7 @@ a{
 }
 
 .pagination > li > a:hover {
-    color: #fff;
+    color: green;
 }
 
 .pagination > li > .active {

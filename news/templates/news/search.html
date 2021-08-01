@@ -1,101 +1,40 @@
+{% extends 'news/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacker News</title>
-    <script src="https://kit.fontawesome.com/12a691948f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <section id="list" class="page demo-list">
-        <div id="list-navigation">
-            <div class="list-filter">
-                <li id="filter-active" class="filter">
-                    <div class="list-filter-label">
-                        <a href="{% url 'home' %}"><h1>Hacker News</h1></a>
-                    </div>
-                    <form class="list-filter-label" action="{% url 'search_news' %}">
-                        <input type="search" name="keyword" id="" placeholder="search ..." value="">
-                         <button type="submit" class="btn btn-sm button-theme">Search</button>
+
+{% block content %}
+    
+<section id="list" class="page demo-list">
+    <div id="list-navigation">
+
+        {% include 'news/includes/heading.html' %}
         
-                    </form>
-                    
-                  
-
-                </li>
-            </div>
-            <div class="filter-indicator icon-caret-down"></div>
-
+        <div id="list-navigation-container" style="margin-top: 44px;">
+            <h1 style="text-align: center; color: white">Search Results</h1>
+            <p style="text-align: center; color: white">{{news|length}} results found</p>
             
-            
-            <div id="list-navigation-container" style="margin-top: 48px;">
-                <h1 style="text-align: center; color: white">Search Results</h1>
-                <p style="text-align: center; color: white">{{news|length}} results found</p>
-                
-                <div id="list-navigation-container-items" style="margin-top: 30px;">
-                    
-                        
-                    <ul>
-                        {% for item in news %}
-                        <li data-color="green">
-                            <a href="#">
-                                <div class="item-left">
-                                    <div class="item-header">
-                                        <div class="item-title"><h5 item-green>{{ item.title.title }}</h5></div>
-                                    </div>
-                                    <div class="item-meta item-assignee"><p>Author: <strong>{{ item.author.capitalize }}</strong></p></div>
-                                    <div class="item-meta item-assignee"><p>Type: <strong>{{ item.type.capitalize }}</strong></p></div>
-                                    <div class="item-meta item-due"><p>Date: <strong>{{ item.time }}</strong></p></div>
+            <div id="list-navigation-container-items" style="margin-top: 30px;">
+                <ul>
+                    {% for item in news %}
+                    <li data-color="green">
+                        <a href="#">
+                            <div class="item-left">
+                                <div class="item-header">
+                                    <div class="item-title"><h5 item-green>{{ item.title.title }}</h5></div>
                                 </div>
-                                <div class="item-right">
-                                    <i class="icon-caret-right"></i>
-                                </div>
-                            </a>
-                        </li>
-                        {% endfor %} 
-                    </ul>
-                </div>
-
-                <!-- Page navigation start -->
-                <div style="display: flex; justify-content: center; align-items: center;">
-                    <nav margin-top: auto>
-                        {% if news.has_other_pages %}
-                        <ul class="pagination">
-                            {% if news.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" style="padding: 5px" href="?page={{ news.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
-                            </li>
-                            {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link" style="padding: 5px"><i class="fa fa-angle-left"></i></a>
-                            </li>
-                            {% endif %}
-                            {% for page_number in news.paginator.page_range %}
-                            {% if news.number == page_number %}
-                                <li class="page-item"><a class="page-link active" href="#" style="padding: 5px">{{ page_number }}</a></li>
-                            {% else %}
-                                <li class="page-item"><a class="page-link" href="?page={{ page_number }}" style="padding: 5px">{{ page_number }}</a></li>
-                            {% endif %}
-                            {% endfor %}
-                            
-                            {% if news.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ news.next_page_number }}" style="padding: 5px"><i class="fa fa-angle-right"></i></a>
-                            </li>
-                            {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link" style="padding: 5px"><i class="fa fa-angle-right"></i></a>
-                            </li>
-                            {% endif %}
-                        </ul>
-                        {% endif %}
-                    </nav>
-                </div>
+                                <div class="item-meta item-assignee"><p>Author: <strong>{{ item.author.capitalize }}</strong></p></div>
+                                <div class="item-meta item-assignee"><p>Type: <strong>{{ item.type.capitalize }}</strong></p></div>
+                                <div class="item-meta item-due"><p>Date: <strong>{{ item.time }}</strong></p></div>
+                            </div>
+                            <div class="item-right">
+                                <i class="icon-caret-right"></i>
+                            </div>
+                        </a>
+                    </li>
+                    {% endfor %} 
+                </ul>
             </div>
         </div>
-    </section>
-</body>
-</html>
+    </div>
+</section>
+{% endblock content %}
+    

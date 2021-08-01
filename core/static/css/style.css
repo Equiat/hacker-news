@@ -92,9 +92,7 @@ a{
     width: 90%;
     display: inline-block;
 }
-.demo-list .item-header{
-    
-}
+
 .demo-list .item-badge{
     color:#fff;
     font-size:26px;
@@ -239,4 +237,51 @@ a{
     font-size: 20px;
     line-height: 30px;
     margin-right: 3px;
+}
+
+.p-4 {
+    padding: 4px;
+}
+
+.mg-l {
+    margin-left: 5px;
+}
+
+.flex-row {
+    display: flex; 
+    flex-direction: row;
+}
+
+.heading-div {
+    margin-left: -115px !important;
+}
+
+.heading-title {
+    font-size: 21px; 
+    margin-bottom: 5px;
+}
+
+button {
+	color: #383737!important;
+	text-transform: uppercase;
+	text-decoration: none;
+	background: #fff;
+	display: inline-block;
+	border: none;
+	transition: all 0.4s ease 0s;
+    cursor: pointer;
+}
+
+button:hover {
+    color: #fff !important;
+    background: #383737!important;
+	letter-spacing: 1px;
+	-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+	-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+	box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+	transition: all 0.4s ease 0s;
+}
+
+input[type=search]:focus {
+    outline: none;
 }

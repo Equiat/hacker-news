@@ -1,24 +1,15 @@
-from django.views.generic import ListView
 from django.views import View
 from django.shortcuts import render 
 from django.core.paginator import Paginator
 
 from news.models import NewsItem
 
-# class Home(ListView):
-#     model = News
-
-#     template_name = 'news/home.html'  # Default: <app_label>/<model_name>_list.html
-#     context_object_name = 'news'  # Default: object_list
-#     paginate_by = 10
-#     queryset = News.objects.all()  # Default: Model.objects.all()
-
 
 class Home(View):
 
     def get(self, request):
         news = NewsItem.objects.all().order_by('-added_at')
-        paginator = Paginator(news, per_page=10)
+        paginator = Paginator(news, per_page=7)
         page = request.GET.get('page')
         paged_news = paginator.get_page(page)
 
@@ -32,13 +23,6 @@ class Home(View):
             'types': paged_types
         }
 
-        # context = {
-        #     'news': paged_news
-        # }
-
-        # return render(request, 'news/home.html', context)
-
-    # def post(self, request):
         if 'story' in request.GET:
             story = request.GET['story']
             if story:
@@ -49,8 +33,6 @@ class Home(View):
 
                 context['types'] = paged_types
                 
-    
-
         if 'job' in request.GET:
             job = request.GET['job']
             if job:
@@ -62,3 +44,4 @@ class Home(View):
                 context['types'] = paged_types
     
         return render(request, 'news/home.html', context)
+        

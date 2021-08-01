@@ -12,6 +12,7 @@ The following technologies were used in this project:
 - [CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps)
 - [Python](https://www.python.org/)
 - [Django](https://www.djangoproject.com/)
+- [Django REST Framework](https://www.django-rest-framework.org/)
 
 
 ## Requirements

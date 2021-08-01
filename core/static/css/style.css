@@ -285,3 +285,7 @@ button:hover {
 input[type=search]:focus {
     outline: none;
 }
+
+.p-all {
+    padding: 10px 0 10px 10px;
+}

@@ -1,7 +1,7 @@
 from django.urls import path
 
-from news.views.home import Home
-from news.views.news_search import Search
+from news.views import Home
+from news.views import Search
 
 urlpatterns = [
     path('', Home.as_view(), name='home'),

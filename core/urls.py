@@ -21,3 +21,5 @@ urlpatterns = [
     path('', include('news.urls')),
     path('api/v1/', include('api.urls')),
 ]
+
+handler404 = 'core.views.page_not_found_view'

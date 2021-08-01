@@ -1,0 +1,12 @@
+{% extends 'news/base.html' %}
+
+{% block content %}
+<div style='display: flex; flex-flow: column wrap; justify-content: center; align-items: center; margin-top: 100px; color: white;'>
+
+    <h1>404 Page Not Found</h1>
+    <form action="{% url 'home' %}" style="margin-top: 20px">
+        <button type="submit" class="p-4">Go Home</button> 
+    </form>
+</div>   
+{% endblock content %}
+    

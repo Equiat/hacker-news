@@ -33,7 +33,7 @@ class ListItems(ListAPIView):
         '''
         queryset = self.get_queryset()
         serializer = self.serializer_class(queryset, many=True)
-        return Response(data={'data': serializer.data}, status=status.HTTP_200_OK)
+        return Response(data={'news': serializer.data}, status=status.HTTP_200_OK)
     
 
 
@@ -46,7 +46,7 @@ class AddItem(APIView):
         serializer = NewsItemSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(data={'status': serializer.data}, status=status.HTTP_201_CREATED)
+            return Response(data={'news': serializer.data}, status=status.HTTP_201_CREATED)
         return Response(errors=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -69,7 +69,7 @@ class UpdateItem(APIView):
         '''
         modify news item if and only if it was not added from Hacker News server
         '''
-
+        
         try:
             news_item = NewsItem.objects.get(is_from_api=False, id=id)
         except:
@@ -90,6 +90,6 @@ class UpdateItem(APIView):
         try:
             news_item = NewsItem.objects.get(is_from_api=False, id=id)
             news_item.delete()
-            return Response(data={'data': {}}, status=status.HTTP_204_NO_CONTENT)
+            return Response(data={'news': {}}, status=status.HTTP_204_NO_CONTENT)
         except:
             return Response(errors={'message': 'Cannot delete news item from Hacker News API'}, status=status.HTTP_400_BAD_REQUEST)

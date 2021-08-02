@@ -10,7 +10,7 @@ class Home(View):
     '''
     
     def get(self, request):
-        news = NewsItem.objects.all().order_by('-added_at')
+        news = NewsItem.objects.all().order_by('title')
         paginator = Paginator(news, per_page=7)
         page = request.GET.get('page')
         paged_news = paginator.get_page(page)

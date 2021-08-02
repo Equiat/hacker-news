@@ -31,7 +31,7 @@ class ListItems(ListAPIView):
         '''
         List all news items in the database.
         '''
-        queryset = self.get_queryset()
+        queryset = self.get_queryset().order_by('title')
         serializer = self.serializer_class(queryset, many=True)
         return Response(data={'news': serializer.data}, status=status.HTTP_200_OK)
     

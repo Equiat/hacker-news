@@ -13,17 +13,53 @@ def get_all_news():
     print('\n**********************\n Fetching data from Hacker News API. . .')
    
 
-    response = requests.get(f'{BASE_URL}/newstories.json?print=pretty&orderBy="$key"&limitToFirst=100')
-    data = response.json()
+    story_response = requests.get(f'{BASE_URL}/newstories.json?print=pretty&orderBy="$key"&limitToFirst=50')
+    job_response = requests.get(f'{BASE_URL}/jobstories.json?print=pretty&orderBy="$key"&limitToFirst=50')
+    
+    story_data = story_response.json()
+    job_data = job_response.json()
 
-    ALL_NEWS['data'] = data
-
-    # Get data for each news item 
+    ALL_NEWS['data'] = story_data
+    
+    # Get data for each story item 
     for item in ALL_NEWS['data']:
         response = requests.get(f'{BASE_URL}/item/{item}.json')
         data = response.json()
 
-        # persist news items to database
+        # persist story items to database
+        for news in [data]:
+            if 'text' in news.keys():
+                news_item = NewsItem(
+                    title=news['title'], 
+                    author=news['by'], 
+                    type=news['type'], 
+                    text=news['text'], 
+                    is_from_api=True, 
+                    time=news['time'],
+                    score=news['score']
+                ) 
+                news_item.save()
+
+            if 'url' in news.keys():
+                news_item = NewsItem(
+                    title=news['title'], 
+                    author=news['by'], 
+                    type=news['type'], 
+                    url=news['url'], 
+                    is_from_api=True, 
+                    time=news['time'],
+                    score=news['score']
+                ) 
+                news_item.save()
+
+    ALL_NEWS['data'] = job_data
+
+    # Get data for each job item 
+    for item in ALL_NEWS['data']:
+        response = requests.get(f'{BASE_URL}/item/{item}.json')
+        data = response.json()
+
+        # persist job items to database
         for news in [data]:
             if 'text' in news.keys():
                 news_item = NewsItem(

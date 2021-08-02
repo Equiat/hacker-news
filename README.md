@@ -1,7 +1,6 @@
 # Hacker News Clone
 
-
-
+This is a Django web application that retrieves data from Hacker News API and makes it easier to navigate the news items. It provides search and filter functionality and also enables clients, through three API endpoints, to create news items, modify and delete only the items they created and provide read-only access to news items generated from Hacker News API server. 
 
 
 ## Technologies 
@@ -21,9 +20,13 @@ The following technologies were used in this project:
 
 Before starting, you need to have [Git](https://git-scm.com) and [Python](https://www.python.org/) installed.
 
+## Create a virtual environment
+
+    python3 -m venv env
+
 ## Activate the virtual environment
 
-    . venv/bin/activate
+    . env/bin/activate
 
 ## Install dependencies
 
@@ -41,9 +44,18 @@ Before starting, you need to have [Git](https://git-scm.com) and [Python](https:
 
     python manage.py collectstatic
 
-## Start server
+## Run Tests
 
-    python manage.py runserver
+    python manage.py test
+
+## Fetch data from Hacker News API
+
+    python manage.py shell < hn_api.py
+
+## Start server
+    Open another terminal window, activate the virtual environment and run the following command:
+
+    . env/bin/activate && python manage.py runserver
 
 
 # Endpoints
@@ -57,7 +69,7 @@ The endpoints, expected payloads, and responses are described below.
 
 `GET api/v1/news/`
 
-    curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/news
+    curl -i -H 'Accept: application/json' http://127.0.0.1:8000/api/v1/news/
 
 ### Response
 

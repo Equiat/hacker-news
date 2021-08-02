@@ -69,8 +69,7 @@ a{
 	color: #219528;
 	margin-left: 75%;
 }
-.demo-list #filter-active{
-}
+
 .demo-list #filter-critical{
     background:linear-gradient(#a20705,#e00019);
 }
@@ -162,7 +161,6 @@ a{
 
 /* pagination */
 
-/** Paginatin box **/
 .pagination-box {
     margin-bottom: 25px;
 }
@@ -288,4 +286,17 @@ input[type=search]:focus {
 
 .p-all {
     padding: 10px 0 10px 10px;
+}
+
+.div-404 {
+    display: flex; 
+    flex-flow: column wrap; 
+    justify-content: center; 
+    align-items: center;
+    margin-top: 100px; 
+    color: white;
+}
+
+.mt-20 {
+    margin-top: 20px;
 }

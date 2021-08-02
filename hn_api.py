@@ -1,4 +1,5 @@
 import requests
+from twisted.internet import task, reactor
 from news.models import NewsItem
 
 BASE_URL = 'https://hacker-news.firebaseio.com/v0'
@@ -8,6 +9,9 @@ NEWS_ITEMS = []
 
 def get_all_news():
     ''' get list of 100 most recent news from Hacker News API '''
+    
+    print('\n**********************\n Fetching data from Hacker News API. . .')
+   
 
     response = requests.get(f'{BASE_URL}/newstories.json?print=pretty&orderBy="$key"&limitToFirst=100')
     data = response.json()
@@ -44,7 +48,15 @@ def get_all_news():
                     score=news['score']
                 ) 
                 news_item.save()
+    print('\n**********************\n done')
     return
+    
+timeout = 300.0 # 5 minutes 
 
-get_all_news()
-print('\n**********************\n done')
+def ready():
+    return get_all_news()
+
+l = task.LoopingCall(ready)
+l.start(timeout) # call every 5 minutes
+
+reactor.run()

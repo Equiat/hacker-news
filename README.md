@@ -20,6 +20,8 @@ The following technologies were used in this project:
 
 Before starting, you need to have [Git](https://git-scm.com) and [Python](https://www.python.org/) installed.
 
+Kindly ensure that you are in the root directory before running the following commands.
+
 ## Create a virtual environment
 
     python3 -m venv env
